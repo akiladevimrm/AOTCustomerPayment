@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutionException;
 
 public class PaymentInfoSender {
     private final static String TOPIC = "PaymentTopic";
-    private final static String BOOTSTRAP_SERVER = "localhost:9092";
+    private final static String BOOTSTRAP_SERVER = "kafka:9092";
 
     private static Producer<String, String> getProducer() {
         Properties settings = new Properties();
@@ -20,12 +20,14 @@ public class PaymentInfoSender {
         settings.put(ProducerConfig.CLIENT_ID_CONFIG, "com.aot.orders.topic.OrderStatusProducer");
         settings.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         settings.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        settings.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
-        settings.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "C:\\codes\\programs\\Kafka\\ssl\\client.truststore.jks");
-        settings.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "test1234");
-        settings.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, "C:\\codes\\programs\\Kafka\\ssl\\server.keystore.jks");
-        settings.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "test1234");
-        settings.put(SslConfigs.SSL_KEY_PASSWORD_CONFIG, "test1234");
+        settings.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
+        settings.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "/app/apps/AOTCustomerPayment/src/main/java/com/aot/invoice/jks/kafka.truststore.jks");
+        settings.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "test123");
+        settings.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, "/app/apps/AOTCustomerPayment/src/main/java/com/aot/invoice/jks/kafka.keystore.jks");
+        settings.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "test123");
+        settings.put(SslConfigs.SSL_KEY_PASSWORD_CONFIG, "test123");
+        settings.put(SaslConfigs.SASL_MECHANISM, "PLAIN");
+        settings.put(SaslConfigs.SASL_JAAS_CONFIG, "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"" + "user" + "\" password=\"" + "password" + "\";");
         return new KafkaProducer<>(settings);
     }
 
