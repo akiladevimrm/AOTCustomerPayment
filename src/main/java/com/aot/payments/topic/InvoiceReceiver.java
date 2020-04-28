@@ -26,9 +26,9 @@ public class InvoiceReceiver {
         settings.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         settings.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         settings.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
-        settings.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "/app/apps/AOTCustomerPayment/src/main/java/com/aot/invoice/jks/kafka.truststore.jks");
+        settings.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "/app/apps/AOTCustomerPayment/src/main/resources/jks/kafka.truststore.jks");
         settings.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "test123");
-        settings.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, "/app/apps/AOTCustomerPayment/src/main/java/com/aot/invoice/jks/kafka.keystore.jks");
+        settings.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, "/app/apps/AOTCustomerPayment/src/main/resources/jks/kafka.keystore.jks");
         settings.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "test123");
         settings.put(SslConfigs.SSL_KEY_PASSWORD_CONFIG, "test123");
         settings.put(SaslConfigs.SASL_MECHANISM, "PLAIN");
